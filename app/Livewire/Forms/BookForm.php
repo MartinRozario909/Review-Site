@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Livewire\Forms;
+
+use App\Models\Book;
+use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
+
+class BookForm extends Form
+{
+    public ?Book $book;
+
+    #[Rule("required", message: ":attribute is required", as: "Title of the book")]
+    // #[Rule('min:20')]
+    public string $title = "";
+
+    #[Rule("required", message: ":attribute is required", as: "Author of the book")]
+    public string $author = "";
+
+    #[Rule('nullable')]
+    public ?string $notes = "";
+
+    public function setBook(Book $book)
+    {
+        $this->book = $book;
+        $this->fill(
+            $book->only('title', 'author', 'notes')
+        );
+    }
+
+    public function update()
+    {
+        $this->book->update(
+            $this->only('title', 'author')
+        );
+        $this->reset();
+    }
+
+    // public function messages()
+    // {
+    //     return [
+    //         'title.required' => 'Please enter a title for the book.',
+    //         'author.required' => 'Please enter a name for the author.',
+    //     ];
+    // }
+
+    public function updateNotes()
+    {
+        $this->book->update(
+            $this->only('notes')
+        );
+    }
+
+    public function create()
+    {
+        $book = auth()->user()->books()->create(
+            $this->only('title', 'author')
+        );
+        $this->reset();
+        return $book;
+    }
+}
