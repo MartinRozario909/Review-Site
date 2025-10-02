@@ -1,6 +1,6 @@
 # Review Site
 
-This project is website where you can add Book'name and Author's name. We can add notes for the book. We can also update and delete books. Searching books can be done by typing Book'name or Author's name.
+This project is website where you can add Book'name and Author's name. We can add notes for the book. We can also update and delete books. Searching books can be done by typing Book's name or Author's name.
 
 This the dasboard of the Review Site.
 <img src="public/screenshots/screen1.png" />
